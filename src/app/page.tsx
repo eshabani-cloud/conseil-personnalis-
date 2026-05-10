@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 const calendlyLink = "https://calendly.com/e-shabani-dayslegacy/30min";
@@ -11,7 +10,6 @@ type FormState = "idle" | "loading" | "error";
 type CookieChoice = "accepted" | "refused" | null;
 
 export default function Home() {
-  const router = useRouter();
   const [formState, setFormState] = useState<FormState>("idle");
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookieChoice, setCookieChoice] = useState<CookieChoice | undefined>(undefined);
@@ -39,6 +37,7 @@ export default function Home() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    formData.set("_url", `${window.location.origin}${window.location.pathname}`);
 
     try {
       const response = await fetch("https://formsubmit.co/ajax/e.shabani@dayslegacy.com", {
@@ -47,12 +46,23 @@ export default function Home() {
         body: formData,
       });
 
+      const raw = await response.text();
+      let parsed: { success?: boolean | string; message?: string } = {};
+      try {
+        parsed = raw ? (JSON.parse(raw) as typeof parsed) : {};
+      } catch {
+        /* réponse non JSON */
+      }
+
       if (!response.ok) {
-        throw new Error("Erreur lors de l'envoi");
+        throw new Error(parsed.message || "Erreur lors de l'envoi");
+      }
+      if (parsed.success === false || parsed.success === "false") {
+        throw new Error(parsed.message || "Envoi refusé par le service de formulaire");
       }
 
       form.reset();
-      router.push("/merci");
+      window.location.assign("/merci");
     } catch {
       setFormState("error");
     }
@@ -352,6 +362,7 @@ export default function Home() {
             <div className="panel">
               <form onSubmit={submitForm} className="contact-form">
                   <input type="hidden" name="_subject" value="Nouvelle demande — accompagnement dirigeant DAYS LEGACY" />
+                  <input type="hidden" name="_captcha" value="false" />
                   <p style={{ fontWeight: 700, fontSize: "1.05rem", color: "var(--texte)" }}>Formulaire de contact</p>
                   <label>
                     Prénom
