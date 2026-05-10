@@ -25,8 +25,31 @@ export default function MentionsLegalesPage() {
 
           <h2>Hébergement du site</h2>
           <p>
-            Les informations relatives à l&apos;hébergeur seront ajoutées dès que la solution d&apos;hébergement définitive
-            sera choisie.
+            Le site <strong>votreconseil.guide</strong> est hébergé par{" "}
+            <strong>Vercel Inc.</strong>, société de droit américain.
+          </p>
+          <p>
+            <strong>Adresse du siège social :</strong> 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis.
+          </p>
+          <p>
+            <strong>Site web :</strong>{" "}
+            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
+              vercel.com
+            </a>
+            {" — "}
+            <strong>Assistance :</strong>{" "}
+            <a href="https://vercel.com/help" target="_blank" rel="noopener noreferrer">
+              vercel.com/help
+            </a>
+            .
+          </p>
+          <p>
+            Les contenus sont servis via l&apos;infrastructure de déploiement et de diffusion de Vercel. Pour plus de
+            détails sur les emplacements et la sécurité :{" "}
+            <a href="https://vercel.com/docs/security" target="_blank" rel="noopener noreferrer">
+              documentation Vercel — sécurité
+            </a>
+            .
           </p>
 
           <h2>Propriété intellectuelle</h2>

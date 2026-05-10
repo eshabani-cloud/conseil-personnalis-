@@ -10,7 +10,7 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dayslegacy.com"),
+  metadataBase: new URL("https://votreconseil.guide"),
   title: "Accompagnement stratégique du dirigeant | DAYS LEGACY",
   description:
     "Accompagnement stratégique pour dirigeants de PME et entrepreneurs : rémunération, trésorerie d'entreprise, patrimoine personnel et professionnel.",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Accompagnement stratégique du dirigeant | DAYS LEGACY",
     description:
       "Une approche globale pour structurer rémunération, trésorerie d'entreprise et patrimoine personnel et professionnel.",
-    url: "https://dayslegacy.com",
+    url: "https://votreconseil.guide",
     siteName: "DAYS LEGACY",
     locale: "fr_FR",
     type: "website",
