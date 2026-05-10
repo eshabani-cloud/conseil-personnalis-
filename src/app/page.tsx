@@ -2,14 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 const calendlyLink = "https://calendly.com/e-shabani-dayslegacy/30min";
 
-type FormState = "idle" | "loading" | "success" | "error";
+type FormState = "idle" | "loading" | "error";
 type CookieChoice = "accepted" | "refused" | null;
 
 export default function Home() {
+  const router = useRouter();
   const [formState, setFormState] = useState<FormState>("idle");
   const [menuOpen, setMenuOpen] = useState(false);
   const [cookieChoice, setCookieChoice] = useState<CookieChoice | undefined>(undefined);
@@ -50,7 +52,7 @@ export default function Home() {
       }
 
       form.reset();
-      setFormState("success");
+      router.push("/merci");
     } catch {
       setFormState("error");
     }
@@ -348,16 +350,7 @@ export default function Home() {
               </a>
             </div>
             <div className="panel">
-              {formState === "success" ? (
-                <div className="success-message">
-                  <h3>Votre demande a bien été envoyée.</h3>
-                  <p>Nous revenons vers vous rapidement. Vous pouvez également choisir votre créneau dès maintenant.</p>
-                  <a className="btn btn-primary" href={calendlyLink} target="_blank" rel="noopener noreferrer">
-                    Choisir mon créneau sur Calendly
-                  </a>
-                </div>
-              ) : (
-                <form onSubmit={submitForm} className="contact-form">
+              <form onSubmit={submitForm} className="contact-form">
                   <input type="hidden" name="_subject" value="Nouvelle demande — accompagnement dirigeant DAYS LEGACY" />
                   <p style={{ fontWeight: 700, fontSize: "1.05rem", color: "var(--texte)" }}>Formulaire de contact</p>
                   <label>
@@ -419,7 +412,6 @@ export default function Home() {
                     <Link href="/politique-de-confidentialite">politique de confidentialité</Link>.
                   </p>
                 </form>
-              )}
             </div>
           </div>
         </section>
